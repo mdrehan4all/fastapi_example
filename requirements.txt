@@ -1,0 +1,6 @@
+fastapi
+uvicorn[standard]
+SQLAlchemy>=2.0,<3.0
+psycopg[binary]>=3.2
+email-validator
+python-dotenv

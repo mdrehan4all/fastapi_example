@@ -10,7 +10,7 @@ from pydantic import BaseModel, EmailStr, Field, model_validator
 from sqlalchemy import String, create_engine, select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import DeclarativeBase, Mapped, Session, mapped_column, sessionmaker
-
+from fastapi.middleware.cors import CORSMiddleware
 
 load_dotenv()
 DATABASE_URL = os.getenv("DATABASE_URL")
@@ -87,6 +87,12 @@ async def lifespan(_: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"]
+)
 
 @app.get("/")
 def home():
